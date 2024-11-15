@@ -23,9 +23,10 @@ public:
     void move_cont(double speed);
     void move_distance(double distance, double speed);
 
+/*
     void sideways_cont(double speed);
     void sideways_distance(double distance, double speed);
-
+*/
     void rotate(double degrees, double speed); // Degrees per second
 
     void open_claw();
