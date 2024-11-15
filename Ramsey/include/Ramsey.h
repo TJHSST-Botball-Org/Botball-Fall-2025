@@ -7,6 +7,8 @@ class Ramsey  {
 private:
     const static double LEFT_TICKS_PER_INCH = 0;
     const static double RIGHT_TICKS_PER_INCH = 0;
+    const static double AXLE_LENGTH = 0; // Distance between the two wheels
+    constexpr double inches_per_degree = (3.14 * AXLE_LENGTH)/360.0;
 
     const unsigned int left_wheel_pin = 0;
     const unsigned int right_wheel_pin = 0;
