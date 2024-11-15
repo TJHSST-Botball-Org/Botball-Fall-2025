@@ -29,6 +29,8 @@ public:
 */
     void rotate(double degrees, double speed); // Degrees per second
 
+    void stop();
+
     void open_claw();
     void close_claw();
 
