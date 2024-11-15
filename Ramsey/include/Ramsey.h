@@ -37,5 +37,5 @@ public:
     void open_claw();
     void close_claw();
 
-    void is_sensor_touch();
+    bool is_sensor_touch();
 };
