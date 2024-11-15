@@ -30,6 +30,7 @@ public:
     void sideways_distance(double distance, double speed);
 */
     void rotate(double degrees, double speed); // Degrees per second
+                                               // Negative is CCW, Positive is CW
 
     void stop();
 
