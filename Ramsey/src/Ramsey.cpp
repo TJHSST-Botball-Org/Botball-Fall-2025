@@ -31,12 +31,50 @@ void Ramsey::move_distance(double distance, double speed)
     stop();
 }
 
-void Ramsey::sideways_cont(){
-    
+void Ramsey::sideways_cont(double speed){
+    if (speed>0){
+        mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
+        mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH*-1);
+        mav(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
+        mav(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH*-1);
+    }
+    else if (speed<0){
+        mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH*-1);
+        mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
+        mav(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH*-1);
+        mav(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
+    }
+    else{
+        mav(left_front_wheel_pin, 0);
+        mav(right_back_wheel_pin, 0);
+        mav(right_front_wheel_pin, 0);
+        mav(left_back_wheel_pin, 0);
+    }
 }
 
 void Ramsey::sideways_distance(double distance, double speed){
-
+    cmpc(left_front_wheel_pin);
+    cmpc(right_front_wheel_pin);
+    cmpc(left_back_wheel_pin);
+    cmpc(right_back_wheel_pin);
+    if (distance > 0) {
+        mtp(left_front_wheel_pin, speed, distance*this->LEFT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, speed, distance*this->RIGHT_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, speed*-1, distance*this->RIGHT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, speed*-1, distance*this->LEFT_TICKS_PER_INCH);
+    }
+    
+    if (distance < 0) {
+        mtp(left_front_wheel_pin, speed*-1, distance*this->LEFT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, speed*-1, distance*this->RIGHT_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, speed, distance*this->RIGHT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, speed, distance*this->LEFT_TICKS_PER_INCH);
+    }
+    
+    while (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin) || get_motor_done(this->left_back_wheel_pin))){
+        msleep(1);
+    }
+    stop();
 }
 
 void Ramsey::rotate(double degrees, double speed)
