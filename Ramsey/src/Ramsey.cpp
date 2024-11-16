@@ -32,23 +32,17 @@ void Ramsey::move_distance(double distance, double speed)
 }
 
 void Ramsey::sideways_cont(double speed){
-    if (speed>0){
-        mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
-        mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH*-1);
-        mav(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
-        mav(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH*-1);
-    }
-    else if (speed<0){
-        mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH*-1);
-        mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
-        mav(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH*-1);
-        mav(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
-    }
-    else{
+    if (speed=0){
         mav(left_front_wheel_pin, 0);
         mav(right_back_wheel_pin, 0);
         mav(right_front_wheel_pin, 0);
         mav(left_back_wheel_pin, 0);
+    }
+    else{
+        mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
+        mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH*-1);
+        mav(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
+        mav(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH*-1);
     }
 }
 
