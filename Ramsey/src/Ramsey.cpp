@@ -31,6 +31,14 @@ void Ramsey::move_distance(double distance, double speed)
     stop();
 }
 
+void Ramsey::sideways_cont(){
+    
+}
+
+void Ramsey::sideways_distance(double distance, double speed){
+
+}
+
 void Ramsey::rotate(double degrees, double speed)
 {
     double left_ticks_speed = speed*LEFT_TICKS_PER_INCH;
