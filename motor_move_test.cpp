@@ -14,9 +14,9 @@ int main()
     */
 
     const int LEFT_WHEEL_PIN = 0;
-    const int RIGHT_WHEEL_PIN = 0;
-    const int TOUCH_SENSOR_PIN = 0;
-    const double DISTANCE = 0;
+    const int RIGHT_WHEEL_PIN = 2;
+    const int TOUCH_SENSOR_PIN = 9;
+    const double DISTANCE = 10;
 
     std::cout << "Left wheel is " << LEFT_WHEEL_PIN << "\n";
     std::cout << "Right wheel is " << RIGHT_WHEEL_PIN << "\n";
@@ -25,11 +25,12 @@ int main()
 
     msleep(2000);
 
-    cmpc();
+    cmpc(LEFT_WHEEL_PIN);
+    cmpc(RIGHT_WHEEL_PIN);
     motor_power(LEFT_WHEEL_PIN, 100);
     motor_power(RIGHT_WHEEL_PIN, 100);
 
-    while (!get_digital_value(TOUCH_SENSOR_PIN));
+    while (!get_digital_value(TOUCH_SENSOR_PIN))
     {
         msleep(1);
     }

@@ -5,19 +5,19 @@
 
 class Ramsey  {
 private:
-    const static double LEFT_TICKS_PER_INCH = 0;
-    const static double RIGHT_TICKS_PER_INCH = 0;
-    const static double AXLE_LENGTH = 0; // Distance between the two wheels
-    constexpr double inches_per_degree = (3.14 * AXLE_LENGTH)/360.0;
+    constexpr static double LEFT_TICKS_PER_INCH = 0.0;
+    constexpr static double RIGHT_TICKS_PER_INCH = 0.0;
+    constexpr static double AXLE_LENGTH = 0.0; // Distance between the two wheels
+    constexpr static double inches_per_degree = (3.14 * AXLE_LENGTH)/360.0;
 
-    const unsigned int left_wheel_pin = 0;
-    const unsigned int right_wheel_pin = 0;
+    constexpr static unsigned int left_wheel_pin = 0;
+    constexpr static unsigned int right_wheel_pin = 0;
 
-    const unsigned int servo_pin = 0;
-    const unsigned int close_servo_value = 0;
-    const unsigned int open_servo_value = 0;
+    constexpr static unsigned int servo_pin = 0;
+    constexpr static unsigned int close_servo_value = 0;
+    constexpr static unsigned int open_servo_value = 0;
 
-    const unsigned int touch_sensor_pin = 0;
+    constexpr static unsigned int touch_sensor_pin = 0;
 
 public:
     Ramsey();

@@ -69,14 +69,14 @@ void Ramsey::stop()
 void Ramsey::open_claw()
 {
     enable_servo(servo_pin);
-    set_servo_position(servo_pin, open_claw);
+    set_servo_position(servo_pin, open_servo_value);
     msleep(1000);
 }
 
 void Ramsey::close_claw()
 {
     enable_servo(servo_pin);
-    set_servo_position(servo_pin, close_claw);
+    set_servo_position(servo_pin, close_servo_value);
     msleep(1000);
 }
 
