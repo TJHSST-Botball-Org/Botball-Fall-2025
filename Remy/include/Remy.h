@@ -3,10 +3,12 @@
 /* This robot does the food tasks */
 /* Speed is measured in inches per second */
 
-class Ramsey  {
+class Remy  {
 private:
-    constexpr static double LEFT_TICKS_PER_INCH = 0.0;
-    constexpr static double RIGHT_TICKS_PER_INCH = 0.0;
+    constexpr static double FRONT_LEFT_TICKS_PER_INCH = 0.0;
+    constexpr static double FRONT_RIGHT_TICKS_PER_INCH = 0.0;
+    constexpr static double BACK_LEFT_TICKS_PER_INCH = 0.0;
+    constexpr static double BACK_RIGHT_TICKS_PER_INCH = 0.0;
     constexpr static double AXLE_LENGTH = 0.0; // Distance between the two wheels
     constexpr static double inches_per_degree = (3.14 * AXLE_LENGTH)/360.0;
 
@@ -22,7 +24,7 @@ private:
     constexpr static unsigned int touch_sensor_pin = 0;
 
 public:
-    Ramsey();
+    Remy();
 
     void move_cont(double speed);
     void move_distance(double distance, double speed);

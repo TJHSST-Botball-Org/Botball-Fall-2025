@@ -1,8 +1,8 @@
-#include <Ramsey.h>
+#include <Remy.h>
 #include <kipr/wombat.h>
 
 
-Ramsey::Ramsey()
+Remy::Remy()
 {
     cmpc(left_front_wheel_pin);
     cmpc(right_front_wheel_pin);
@@ -10,19 +10,20 @@ Ramsey::Ramsey()
     cmpc(right_back_wheel_pin);
 }
 
-void Ramsey::move_cont(double speed)
+void Remy::move_cont(double speed)
 {
     cmpc(left_front_wheel_pin);
     cmpc(right_front_wheel_pin);
     cmpc(left_back_wheel_pin);
     cmpc(right_back_wheel_pin);
+    
     mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
     mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
     mav(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
     mav(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
 }
 
-void Ramsey::move_distance(double distance, double speed)
+void Remy::move_distance(double distance, double speed)
 {
     cmpc(left_front_wheel_pin);
     cmpc(left_back_wheel_pin)
@@ -41,7 +42,7 @@ void Ramsey::move_distance(double distance, double speed)
     stop();
 }
 
-void Ramsey::sideways_cont(double speed){
+void Remy::sideways_cont(double speed){
     if (speed>0){
         mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
         mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH*-1);
@@ -62,7 +63,7 @@ void Ramsey::sideways_cont(double speed){
     }
 }
 
-void Ramsey::sideways_distance(double distance, double speed){
+void Remy::sideways_distance(double distance, double speed){
     cmpc(left_front_wheel_pin);
     cmpc(right_front_wheel_pin);
     cmpc(left_back_wheel_pin);
@@ -87,7 +88,7 @@ void Ramsey::sideways_distance(double distance, double speed){
     stop();
 }
 
-void Ramsey::rotate(double degrees, double speed)
+void Remy::rotate(double degrees, double speed)
 {
     double left_ticks_speed = speed*LEFT_TICKS_PER_INCH;
     double right_ticks_speed = speed*RIGHT_TICKS_PER_INCH;
@@ -120,7 +121,7 @@ void Ramsey::rotate(double degrees, double speed)
     stop();
 }
 
-void Ramsey::stop()
+void Remy::stop()
 {
     cmpc(left_front_wheel_pin);
     cmpc(right_front_wheel_pin);
@@ -132,21 +133,21 @@ void Ramsey::stop()
     motor_power(right_back_wheel_pin, 0);
 }
 
-void Ramsey::open_claw()
+void Remy::open_claw()
 {
     enable_servo(servo_pin);
     set_servo_position(servo_pin, open_servo_value);
     msleep(1000);
 }
 
-void Ramsey::close_claw()
+void Remy::close_claw()
 {
     enable_servo(servo_pin);
     set_servo_position(servo_pin, close_servo_value);
     msleep(1000);
 }
 
-bool Ramsey::is_sensor_touch()
+bool Remy::is_sensor_touch()
 {
     return get_digital_value(touch_sensor_pin);
 }
