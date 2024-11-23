@@ -32,7 +32,8 @@ public:
 
     void move_cont(double speed);
     void move_distance(double distance, double speed);
-
+    void move_till_sensor(double sensor_pin, double speed);
+    void set_elbow(double servo_degree);
 
     void sideways_cont(double speed);
     void sideways_distance(double distance, double speed);
@@ -44,6 +45,7 @@ public:
 
     void open_claw();
     void close_claw();
+    void set_claw(servo_angle);
 
     bool is_sensor_touch();
 };
