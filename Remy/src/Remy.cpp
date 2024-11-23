@@ -43,6 +43,21 @@ void Remy::move_distance(double distance, double speed)
     stop();
 }
 
+void Remy::move_till_sensor(double sensor_pin, double speed)
+{
+
+}
+
+void Remy::set_elbow(double servo_degree)
+{
+
+}
+
+void Remy::set_claw(double servo_degree)
+{
+    
+}
+
 void Remy::sideways_cont(double speed){
     if (speed>0){
         mav(left_front_wheel_pin, speed*this->LEFT_FRONT_TICKS_PER_INCH);
