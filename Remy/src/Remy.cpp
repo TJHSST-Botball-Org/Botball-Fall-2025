@@ -5,36 +5,37 @@
 Remy::Remy()
 {
     cmpc(left_front_wheel_pin);
-    cmpc(right_front_wheel_pin);
     cmpc(left_back_wheel_pin);
+    cmpc(right_front_wheel_pin);
     cmpc(right_back_wheel_pin);
 }
 
 void Remy::move_cont(double speed)
 {
     cmpc(left_front_wheel_pin);
-    cmpc(right_front_wheel_pin);
     cmpc(left_back_wheel_pin);
+    cmpc(right_front_wheel_pin);
     cmpc(right_back_wheel_pin);
-    
-    mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
-    mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
-    mav(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
-    mav(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
+
+    mav(left_front_wheel_pin, speed*this->LEFT_FRONT_TICKS_PER_INCH);
+    mav(left_back_wheel_pin, speed*this->LEFT_BACK_TICKS_PER_INCH);
+    mav(right_front_wheel_pin, speed*this->RIGHT_FRONT_TICKS_PER_INCH);
+    mav(right_back_wheel_pin, speed*this->RIGHT_BACK_TICKS_PER_INCH);
 }
 
 void Remy::move_distance(double distance, double speed)
 {
     cmpc(left_front_wheel_pin);
-    cmpc(left_back_wheel_pin)
+    cmpc(left_back_wheel_pin);
     cmpc(right_front_wheel_pin);
     cmpc(right_back_wheel_pin);
-    mtp(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH, distance*this->LEFT_TICKS_PER_INCH);
-    mtp(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH, distance*this->LEFT_TICKS_PER_INCH);
-    mtp(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH, distance*this->RIGHT_TICKS_PER_INCH);
-    mtp(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH, distance*this->RIGHT_TICKS_PER_INCH);
 
-    if (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin) || get_motor_done(this->left_back_wheel_pin)))
+    mtp(left_front_wheel_pin, speed*this->LEFT_FRONT_TICKS_PER_INCH, distance*this->LEFT_FRONT_TICKS_PER_INCH);
+    mtp(left_back_wheel_pin, speed*this->LEFT_BACK_TICKS_PER_INCH, distance*this->LEFT_BACK_TICKS_PER_INCH);
+    mtp(right_front_wheel_pin, speed*this->RIGHT_FRONT_TICKS_PER_INCH, distance*this->RIGHT_FRONT_TICKS_PER_INCH);
+    mtp(right_back_wheel_pin, speed*this->RIGHT_BACK_TICKS_PER_INCH, distance*this->RIGHT_BACK_TICKS_PER_INCH);
+
+    if (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->left_back_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin)))
     {
         msleep(1);
     }
@@ -44,45 +45,47 @@ void Remy::move_distance(double distance, double speed)
 
 void Remy::sideways_cont(double speed){
     if (speed>0){
-        mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
-        mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH*-1);
-        mav(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
-        mav(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH*-1);
+        mav(left_front_wheel_pin, speed*this->LEFT_FRONT_TICKS_PER_INCH);
+        mav(left_back_wheel_pin, speed*this->LEFT_BACKS_TICKS_PER_INCH*-1);
+        mav(right_front_wheel_pin, speed*this->RIGHT_FRONT_TICKS_PER_INCH*-1);
+        mav(right_back_wheel_pin, speed*this->RIGHT_BACK_TICKS_PER_INCH);
     }
     else if (speed<0){
-        mav(left_front_wheel_pin, speed*this->LEFT_TICKS_PER_INCH*-1);
-        mav(right_front_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
-        mav(right_back_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH*-1);
-        mav(left_back_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
+        mav(left_front_wheel_pin, speed*this->LEFT_FRONT_TICKS_PER_INCH*-1);
+        mav(left_back_wheel_pin, speed*this->LEFT_BACK_TICKS_PER_INCH);
+        mav(right_front_wheel_pin, speed*this->RIGHT_FRONT_TICKS_PER_INCH);
+        mav(right_back_wheel_pin, speed*this->RIGHT_BACK_TICKS_PER_INCH*-1);
     }
     else{
         mav(left_front_wheel_pin, 0);
-        mav(right_back_wheel_pin, 0);
-        mav(right_front_wheel_pin, 0);
         mav(left_back_wheel_pin, 0);
+        mav(right_front_wheel_pin, 0);
+        mav(right_back_wheel_pin, 0);
     }
 }
 
 void Remy::sideways_distance(double distance, double speed){
     cmpc(left_front_wheel_pin);
-    cmpc(right_front_wheel_pin);
     cmpc(left_back_wheel_pin);
+    cmpc(right_front_wheel_pin);
     cmpc(right_back_wheel_pin);
     if (distance > 0) {
-        mtp(left_front_wheel_pin, speed, distance*this->LEFT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, speed, distance*this->RIGHT_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, speed*-1, distance*this->RIGHT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, speed*-1, distance*this->LEFT_TICKS_PER_INCH);
+        mtp(left_front_wheel_pin, speed, distance*this->LEFT_FRONT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, speed*-1, distance*this->LEFT_BACK_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, speed*-1, distance*this->RIGHT_FRONT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, speed, distance*this->RIGHT_BACK_TICKS_PER_INCH);
+        
+        
     }
     
     if (distance < 0) {
-        mtp(left_front_wheel_pin, speed*-1, distance*this->LEFT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, speed*-1, distance*this->RIGHT_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, speed, distance*this->RIGHT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, speed, distance*this->LEFT_TICKS_PER_INCH);
+        mtp(left_front_wheel_pin, speed*-1, distance*this->LEFT_FRONT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, speed, distance*this->LEFT_BACK_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, speed, distance*this->RIGHT_FRONT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, speed*-1, distance*this->RIGHT_BACK_TICKS_PER_INCH);
     }
     
-    while (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin) || get_motor_done(this->left_back_wheel_pin))){
+    while (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->left_back_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin))){
         msleep(1);
     }
     stop();
@@ -94,26 +97,26 @@ void Remy::rotate(double degrees, double speed)
     double right_ticks_speed = speed*RIGHT_TICKS_PER_INCH;
 
     cmpc(left_front_wheel_pin);
-    cmpc(right_front_wheel_pin);
     cmpc(left_back_wheel_pin);
+    cmpc(right_front_wheel_pin);
     cmpc(right_back_wheel_pin);
 
     if (degrees < 0)
     {
-        mtp(left_front_wheel_pin, left_ticks_speed, -degrees*inches_per_degree*LEFT_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, right_ticks_speed, degrees*inches_per_degree*RIGHT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, left_ticks_speed, -degrees*inches_per_degree*LEFT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, right_ticks_speed, degrees*inches_per_degree*RIGHT_TICKS_PER_INCH);
+        mtp(left_front_wheel_pin, left_ticks_speed, -degrees*inches_per_degree*LEFT_FRONT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, left_ticks_speed, -degrees*inches_per_degree*LEFT_BACK_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, right_ticks_speed, degrees*inches_per_degree*RIGHT_FRONT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, right_ticks_speed, degrees*inches_per_degree*RIGHT_BACK_TICKS_PER_INCH);
     }
     else
     {
-        mtp(left_front_wheel_pin, left_ticks_speed, degrees*inches_per_degree*LEFT_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, right_ticks_speed, -degrees*inches_per_degree*RIGHT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, left_ticks_speed, degrees*inches_per_degree*LEFT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, right_ticks_speed, -degrees*inches_per_degree*RIGHT_TICKS_PER_INCH);
+        mtp(left_front_wheel_pin, left_ticks_speed, degrees*inches_per_degree*LEFT_FRONT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, left_ticks_speed, degrees*inches_per_degree*LEFT_BACK_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, right_ticks_speed, -degrees*inches_per_degree*RIGHT_FRONT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, right_ticks_speed, -degrees*inches_per_degree*RIGHT_BACK_TICKS_PER_INCH);
     }
 
-    if (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin) || get_motor_done(this->left_back_wheel_pin)))
+    if (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->left_back_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin)))
     {
         msleep(1);
     }
@@ -124,12 +127,12 @@ void Remy::rotate(double degrees, double speed)
 void Remy::stop()
 {
     cmpc(left_front_wheel_pin);
-    cmpc(right_front_wheel_pin);
     cmpc(left_back_wheel_pin);
+    cmpc(right_front_wheel_pin);
     cmpc(right_back_wheel_pin);
     motor_power(left_front_wheel_pin, 0);
-    motor_power(right_front_wheel_pin, 0);
     motor_power(left_back_wheel_pin, 0);
+    motor_power(right_front_wheel_pin, 0);
     motor_power(right_back_wheel_pin, 0);
 }
 
