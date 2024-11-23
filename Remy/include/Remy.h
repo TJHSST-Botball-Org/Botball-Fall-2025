@@ -5,10 +5,14 @@
 
 class Remy  {
 private:
-    constexpr static double FRONT_LEFT_TICKS_PER_INCH = 0.0;
-    constexpr static double FRONT_RIGHT_TICKS_PER_INCH = 0.0;
-    constexpr static double BACK_LEFT_TICKS_PER_INCH = 0.0;
-    constexpr static double BACK_RIGHT_TICKS_PER_INCH = 0.0;
+    // Left
+    constexpr static double LEFT_FRONT_TICKS_PER_INCH = 0.0;
+    constexpr static double LEFT_BACK_TICKS_PER_INCH = 0.0;
+
+    // Right
+    constexpr static double RIGHT_FRONT_TICKS_PER_INCH = 0.0;
+    constexpr static double RIGHT_BACK_TICKS_PER_INCH = 0.0;
+
     constexpr static double AXLE_LENGTH = 0.0; // Distance between the two wheels
     constexpr static double inches_per_degree = (3.14 * AXLE_LENGTH)/360.0;
 
