@@ -164,9 +164,9 @@ void Remy::close_claw(int duration)
     set_claw(claw_open_position, duration);
 }
 
-bool Remy::is_sensor_touch()
+bool Remy::is_front_sensor_touch()
 {
-    return get_digital_value(touch_sensor_pin);
+    return get_digital_value(front_touch_sensor_pin);
 }
 
 bool Remy::get_sensor_front()
