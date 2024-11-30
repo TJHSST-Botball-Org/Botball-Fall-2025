@@ -14,7 +14,7 @@ private:
     constexpr static double RIGHT_FRONT_TICKS_PER_INCH = 200.88 - 12.5 - 10; //-100;
     constexpr static double RIGHT_BACK_TICKS_PER_INCH = 212.16 - 12.5 - 10;  //-100;
 
-    constexpr static double AXLE_LENGTH = 8.0; // Distance between the two wheels
+    constexpr static double AXLE_LENGTH = 12.0; // Distance between the two wheels
     constexpr static double inches_per_degree = (3.14 * AXLE_LENGTH) / 360.0;
 
     constexpr static unsigned int left_front_wheel_pin = 0;

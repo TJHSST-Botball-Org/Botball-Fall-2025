@@ -1,5 +1,4 @@
 #include <kipr/wombat.h>
-#pragma once
 #include <iostream>
 
 int main(){
@@ -12,11 +11,11 @@ int main(){
     cmpc(left_back_wheel_pin);
     cmpc(right_front_wheel_pin);
     cmpc(right_back_wheel_pin);
-    while(get_digital_value(0) = 0){
-        moter_power(left_front_wheel_pin,100);
-        moter_power(left_back_wheel_pin,100);
-        moter_power(right_front_wheel_pin,100);
-        moter_power(right_back_wheel_pin,100);
+    while(get_digital_value(2) == 0){
+        motor_power(left_front_wheel_pin,100);
+        motor_power(left_back_wheel_pin,-100);
+        motor_power(right_front_wheel_pin,-100);
+        motor_power(right_back_wheel_pin,100);
         msleep(1);
     }
     int lf_position = get_motor_position_counter(left_front_wheel_pin);
