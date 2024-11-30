@@ -1,6 +1,6 @@
 #include <Remy.h>
 #include <kipr/wombat.h>
-
+#include <iostream>
 
 Remy::Remy()
 {
@@ -35,7 +35,7 @@ void Remy::move_distance(double distance, double speed)
     mtp(right_front_wheel_pin, speed*this->RIGHT_FRONT_TICKS_PER_INCH, distance*this->RIGHT_FRONT_TICKS_PER_INCH);
     mtp(right_back_wheel_pin, speed*this->RIGHT_BACK_TICKS_PER_INCH, distance*this->RIGHT_BACK_TICKS_PER_INCH);
 
-    if (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->left_back_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin)))
+    while (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->left_back_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin)))
     {
         msleep(1);
     }
@@ -61,7 +61,7 @@ void Remy::set_claw(double servo_degree)
 void Remy::sideways_cont(double speed){
     if (speed>0){
         mav(left_front_wheel_pin, speed*this->LEFT_FRONT_TICKS_PER_INCH);
-        mav(left_back_wheel_pin, speed*this->LEFT_BACKS_TICKS_PER_INCH*-1);
+        mav(left_back_wheel_pin, speed*this->LEFT_BACK_TICKS_PER_INCH*-1);
         mav(right_front_wheel_pin, speed*this->RIGHT_FRONT_TICKS_PER_INCH*-1);
         mav(right_back_wheel_pin, speed*this->RIGHT_BACK_TICKS_PER_INCH);
     }
@@ -108,9 +108,6 @@ void Remy::sideways_distance(double distance, double speed){
 
 void Remy::rotate(double degrees, double speed)
 {
-    double left_ticks_speed = speed*LEFT_TICKS_PER_INCH;
-    double right_ticks_speed = speed*RIGHT_TICKS_PER_INCH;
-
     cmpc(left_front_wheel_pin);
     cmpc(left_back_wheel_pin);
     cmpc(right_front_wheel_pin);
@@ -118,20 +115,20 @@ void Remy::rotate(double degrees, double speed)
 
     if (degrees < 0)
     {
-        mtp(left_front_wheel_pin, left_ticks_speed, -degrees*inches_per_degree*LEFT_FRONT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, left_ticks_speed, -degrees*inches_per_degree*LEFT_BACK_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, right_ticks_speed, degrees*inches_per_degree*RIGHT_FRONT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, right_ticks_speed, degrees*inches_per_degree*RIGHT_BACK_TICKS_PER_INCH);
+        mtp(left_front_wheel_pin, speed*LEFT_FRONT_TICKS_PER_INCH, -degrees*inches_per_degree*LEFT_FRONT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, speed*LEFT_BACK_TICKS_PER_INCH, -degrees*inches_per_degree*LEFT_BACK_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, speed*RIGHT_FRONT_TICKS_PER_INCH, degrees*inches_per_degree*RIGHT_FRONT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, speed*RIGHT_BACK_TICKS_PER_INCH, degrees*inches_per_degree*RIGHT_BACK_TICKS_PER_INCH);
     }
     else
     {
-        mtp(left_front_wheel_pin, left_ticks_speed, degrees*inches_per_degree*LEFT_FRONT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, left_ticks_speed, degrees*inches_per_degree*LEFT_BACK_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, right_ticks_speed, -degrees*inches_per_degree*RIGHT_FRONT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, right_ticks_speed, -degrees*inches_per_degree*RIGHT_BACK_TICKS_PER_INCH);
+        mtp(left_front_wheel_pin, speed*LEFT_FRONT_TICKS_PER_INCH, degrees*inches_per_degree*LEFT_FRONT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, speed*LEFT_BACK_TICKS_PER_INCH, degrees*inches_per_degree*LEFT_BACK_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, speed*RIGHT_FRONT_TICKS_PER_INCH, -degrees*inches_per_degree*RIGHT_FRONT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, speed*RIGHT_BACK_TICKS_PER_INCH, -degrees*inches_per_degree*RIGHT_BACK_TICKS_PER_INCH);
     }
 
-    if (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->left_back_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin)))
+    while (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->left_back_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin)))
     {
         msleep(1);
     }
