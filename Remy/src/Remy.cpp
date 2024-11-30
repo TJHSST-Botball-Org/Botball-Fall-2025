@@ -51,7 +51,7 @@ void Remy::set_elbow(double servo_degree)
 {
 }
 
-void Remy::sset_claw(int position, int duration)
+void Remy::set_claw(int position, int duration)
 {
     enable_servo(claw_pin);
     set_servo_position(claw_pin, position);
@@ -91,18 +91,18 @@ void Remy::sideways_distance(double distance, double speed)
     cmpc(right_back_wheel_pin);
     if (distance > 0)
     {
-        mtp(left_front_wheel_pin, speed, distance * this->LEFT_FRONT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, speed * -1, distance * this->LEFT_BACK_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, speed * -1, distance * this->RIGHT_FRONT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, speed, distance * this->RIGHT_BACK_TICKS_PER_INCH);
+        mtp(left_front_wheel_pin, speed*LEFT_FRONT_TICKS_PER_INCH, distance * this->LEFT_FRONT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, speed *LEFT_BACK_TICKS_PER_INCH, -1* distance * this->LEFT_BACK_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, speed *RIGHT_FRONT_TICKS_PER_INCH, -1* distance * this->RIGHT_FRONT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, speed*RIGHT_BACK_TICKS_PER_INCH, distance * this->RIGHT_BACK_TICKS_PER_INCH);
     }
 
     if (distance < 0)
     {
-        mtp(left_front_wheel_pin, speed * -1, distance * this->LEFT_FRONT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, speed, distance * this->LEFT_BACK_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, speed, distance * this->RIGHT_FRONT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, speed * -1, distance * this->RIGHT_BACK_TICKS_PER_INCH);
+        mtp(left_front_wheel_pin, speed * LEFT_FRONT_TICKS_PER_INCH, distance * this->LEFT_FRONT_TICKS_PER_INCH);
+        mtp(left_back_wheel_pin, speed * LEFT_BACK_TICKS_PER_INCH, -1*distance * this->LEFT_BACK_TICKS_PER_INCH);
+        mtp(right_front_wheel_pin, speed * RIGHT_FRONT_TICKS_PER_INCH, -1*distance * this->RIGHT_FRONT_TICKS_PER_INCH);
+        mtp(right_back_wheel_pin, speed * RIGHT_BACK_TICKS_PER_INCH, distance * this->RIGHT_BACK_TICKS_PER_INCH);
     }
 
     while (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->left_back_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin)))
@@ -119,20 +119,10 @@ void Remy::rotate(double degrees, double speed)
     cmpc(right_front_wheel_pin);
     cmpc(right_back_wheel_pin);
 
-    if (degrees < 0)
-    {
-        mtp(left_front_wheel_pin, speed * LEFT_FRONT_TICKS_PER_INCH, -degrees * inches_per_degree * LEFT_FRONT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, speed * LEFT_BACK_TICKS_PER_INCH, -degrees * inches_per_degree * LEFT_BACK_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, speed * RIGHT_FRONT_TICKS_PER_INCH, degrees * inches_per_degree * RIGHT_FRONT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, speed * RIGHT_BACK_TICKS_PER_INCH, degrees * inches_per_degree * RIGHT_BACK_TICKS_PER_INCH);
-    }
-    else
-    {
-        mtp(left_front_wheel_pin, speed * LEFT_FRONT_TICKS_PER_INCH, degrees * inches_per_degree * LEFT_FRONT_TICKS_PER_INCH);
-        mtp(left_back_wheel_pin, speed * LEFT_BACK_TICKS_PER_INCH, degrees * inches_per_degree * LEFT_BACK_TICKS_PER_INCH);
-        mtp(right_front_wheel_pin, speed * RIGHT_FRONT_TICKS_PER_INCH, -degrees * inches_per_degree * RIGHT_FRONT_TICKS_PER_INCH);
-        mtp(right_back_wheel_pin, speed * RIGHT_BACK_TICKS_PER_INCH, -degrees * inches_per_degree * RIGHT_BACK_TICKS_PER_INCH);
-    }
+    mtp(left_front_wheel_pin, speed * LEFT_FRONT_TICKS_PER_INCH, degrees * inches_per_degree * LEFT_FRONT_TICKS_PER_INCH);
+    mtp(left_back_wheel_pin, speed * LEFT_BACK_TICKS_PER_INCH, degrees * inches_per_degree * LEFT_BACK_TICKS_PER_INCH);
+    mtp(right_front_wheel_pin, speed * RIGHT_FRONT_TICKS_PER_INCH, -degrees * inches_per_degree * RIGHT_FRONT_TICKS_PER_INCH);
+    mtp(right_back_wheel_pin, speed * RIGHT_BACK_TICKS_PER_INCH, -degrees * inches_per_degree * RIGHT_BACK_TICKS_PER_INCH);
 
     while (!(get_motor_done(this->left_front_wheel_pin) || get_motor_done(this->left_back_wheel_pin) || get_motor_done(this->right_front_wheel_pin) || get_motor_done(this->right_back_wheel_pin)))
     {
@@ -162,11 +152,6 @@ void Remy::open_claw(int duration)
 void Remy::close_claw(int duration)
 {
     set_claw(claw_open_position, duration);
-}
-
-bool Remy::is_front_sensor_touch()
-{
-    return get_digital_value(front_touch_sensor_pin);
 }
 
 bool Remy::get_sensor_front()

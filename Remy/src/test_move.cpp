@@ -7,4 +7,6 @@ int main(){
     Remy robot;
     
     robot.move_distance(6, 1);
+
+    robot.sideways_distance(6, 1);
 }
