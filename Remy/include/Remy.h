@@ -3,7 +3,8 @@
 /* This robot does the food tasks */
 /* Speed is measured in inches per second */
 
-class Remy  {
+class Remy
+{
 private:
     // Left
     constexpr static double LEFT_FRONT_TICKS_PER_INCH = 173.4222222;
@@ -14,7 +15,7 @@ private:
     constexpr static double RIGHT_BACK_TICKS_PER_INCH = 211.5111111;
 
     constexpr static double AXLE_LENGTH = 8.0; // Distance between the two wheels
-    constexpr static double inches_per_degree = (3.14 * AXLE_LENGTH)/360.0;
+    constexpr static double inches_per_degree = (3.14 * AXLE_LENGTH) / 360.0;
 
     constexpr static unsigned int left_front_wheel_pin = 1;
     constexpr static unsigned int right_front_wheel_pin = 0;
@@ -25,7 +26,13 @@ private:
     constexpr static unsigned int close_servo_value = 0;
     constexpr static unsigned int open_servo_value = 0;
 
-    constexpr static unsigned int touch_sensor_pin = 0;
+    constexpr static unsigned int sensor_front_pin = 0;
+    constexpr static unsigned int sensor_left_pin = 1;
+    constexpr static unsigned int sensor_right_pin = 2;
+
+    constexpr static unsigned int claw_pin = 2;
+    constexpr static double claw_close_position = 0.00;
+    constexpr static double claw_open_position = 0.00;
 
 public:
     Remy();
@@ -43,9 +50,11 @@ public:
 
     void stop();
 
-    void open_claw();
-    void close_claw();
-    void set_claw(servo_angle);
+    void open_claw(int duration = 1000);
+    void close_claw(int duration = 1000);
+    void set_claw(int position, int duration = 1000);
 
-    bool is_sensor_touch();
+    bool get_sensor_front();
+    bool get_sensor_left();
+    bool get_sensor_right();
 };
