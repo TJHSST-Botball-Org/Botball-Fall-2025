@@ -13,7 +13,8 @@ private:
     constexpr static unsigned int left_wheel_pin = 0;
     constexpr static unsigned int right_wheel_pin = 3;
 
-    constexpr static unsigned int servo_pin = 0;
+    constexpr static unsigned int arm_servo_pin = 0;
+    constexpr static unsigned int claw_servo_pin = 0;
     constexpr static unsigned int close_servo_value = 0;
     constexpr static unsigned int open_servo_value = 0;
 
@@ -32,6 +33,9 @@ public:
 
     void open_claw();
     void close_claw();
+
+    void stow_arm();
+    void extend_arm();
 
     bool is_sensor_touch();
 };
