@@ -39,7 +39,9 @@ public:
 
     void move_cont(double speed);
     void move_distance(double distance, double speed);
-    void move_till_sensor(double sensor_pin, double speed);
+    void move_till_sensor_forward(double speed);
+    void move_till_sensor_right(double speed);
+    void move_till_sensor_left(double speed);
     void set_elbow(double servo_degree);
 
     void sideways_cont(double speed);
@@ -49,6 +51,8 @@ public:
                                                // Negative is CCW, Positive is CW
 
     void stop();
+
+    void set_arm(int position, int duration = 2000);
 
     void open_claw(int duration = 1000);
     void close_claw(int duration = 1000);

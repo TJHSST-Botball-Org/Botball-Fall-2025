@@ -43,9 +43,25 @@ void Remy::move_distance(double distance, double speed)
     stop();
 }
 
-void Remy::move_till_sensor(double sensor_pin, double speed)
-{
+void Remy::move_till_sensor_forward(double speed){
+    while(!get_sensor_front()){
+        msleep(1);
+        move_distance(0.1, speed);
+    }
 }
+void Remy::move_till_sensor_right(double speed){
+    while(!get_sensor_front()){
+        msleep(1);
+        move_distance(0.1, speed);
+    }
+}
+
+void Remy::move_till_sensor_left(double speed){
+    while(!get_sensor_front()){
+        msleep(1);
+        move_distance(0.1, speed);
+    }
+ }
 
 void Remy::set_elbow(double servo_degree)
 {
@@ -54,8 +70,30 @@ void Remy::set_elbow(double servo_degree)
 void Remy::set_claw(int position, int duration)
 {
     enable_servo(claw_pin);
+    int startPos = get_servo_position(claw_pin);
+    int endPos = position;
+    double deltaPos = (endPos - startPos) / duration;
+
+    for(int currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
+        msleep(1);
+        set_servo_position(claw_pin, currentPos);    
+    }
+
     set_servo_position(claw_pin, position);
-    msleep(duration);
+}
+void Remy::set_arm(int position, int duration)
+{
+    enable_servo(arm_pos);
+    int startPos = get_servo_position(arm_pos);
+    int endPos = position;
+    double deltaPos = (endPos - startPos) / duration;
+
+    for(int currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
+        msleep(1);
+        set_servo_position(arm_pos, currentPos);    
+    }
+
+    set_servo_position(arm_pos, position);
 }
 
 void Remy::sideways_cont(double speed)
