@@ -22,15 +22,13 @@ private:
     constexpr static unsigned int right_front_wheel_pin = 2;
     constexpr static unsigned int right_back_wheel_pin = 3;
 
-    constexpr static unsigned int servo_pin = 0;
-    constexpr static unsigned int close_servo_value = 0;
-    constexpr static unsigned int open_servo_value = 0;
+    constexpr static unsigned int arm_pin = 2;
 
     constexpr static unsigned int sensor_front_pin = 0;
     constexpr static unsigned int sensor_left_pin = 1;
     constexpr static unsigned int sensor_right_pin = 2;
 
-    constexpr static unsigned int claw_pin = 2;
+    constexpr static unsigned int claw_pin = 1;
     constexpr static double claw_close_position = 0.00;
     constexpr static double claw_open_position = 0.00;
 
