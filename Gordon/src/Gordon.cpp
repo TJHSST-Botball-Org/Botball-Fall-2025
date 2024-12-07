@@ -63,15 +63,29 @@ void Gordon::stop()
 
 void Gordon::open_claw()
 {
-    enable_servo(servo_pin);
-    set_servo_position(servo_pin, open_servo_value);
+    enable_servo(claw_servo_pin);
+    set_servo_position(claw_servo_pin, open_servo_value);
     msleep(1000);
 }
 
 void Gordon::close_claw()
 {
-    enable_servo(servo_pin);
-    set_servo_position(servo_pin, close_servo_value);
+    enable_servo(claw_servo_pin);
+    set_servo_position(claw_servo_pin, close_servo_value);
+    msleep(1000);
+}
+
+void Gordon::stow_arm()
+{
+    enable_servo(arm_servo_pin);
+    set_servo_position(arm_servo_pin, stow_servo_value);
+    msleep(1000);
+}
+
+void Gordon::extend_arm()
+{
+    enable_servo(arm_servo_pin);
+    set_servo_position(arm_servo_pin, extend_servo_value);
     msleep(1000);
 }
 

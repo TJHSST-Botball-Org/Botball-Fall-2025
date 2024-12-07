@@ -10,14 +10,19 @@ private:
     constexpr static double AXLE_LENGTH = 6.5; // Distance between the two wheels
     constexpr static double INCHES_PER_DEGREE = (3.14 * AXLE_LENGTH)/360.0;
 
-    constexpr static unsigned int left_wheel_pin = 0;
-    constexpr static unsigned int right_wheel_pin = 3;
+    const static unsigned int left_wheel_pin = 0;
+    const static unsigned int right_wheel_pin = 3;
 
-    constexpr static unsigned int servo_pin = 0;
-    constexpr static unsigned int close_servo_value = 0;
-    constexpr static unsigned int open_servo_value = 0;
+    const static unsigned int arm_servo_pin = 0;
+    const static unsigned int claw_servo_pin = 0;
 
-    constexpr static unsigned int touch_sensor_pin = 0;
+    const static unsigned int close_servo_value = 0;
+    const static unsigned int open_servo_value = 0;
+
+    const static unsigned int stow_servo_value = 0;
+    const static unsigned int extend_servo_value = 0;
+
+    const static unsigned int touch_sensor_pin = 0;
 
 public:
     Gordon();
@@ -32,6 +37,9 @@ public:
 
     void open_claw();
     void close_claw();
+
+    void stow_arm();
+    void extend_arm();
 
     bool is_sensor_touch();
 };
