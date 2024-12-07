@@ -13,13 +13,13 @@ private:
     const static unsigned int left_wheel_pin = 0;
     const static unsigned int right_wheel_pin = 3;
 
-    const static unsigned int arm_servo_pin = 0;
-    const static unsigned int claw_servo_pin = 0;
+    const static unsigned int arm_servo_pin = 1;
+    const static unsigned int claw_servo_pin = 2;
 
-    const static unsigned int close_servo_value = 0;
-    const static unsigned int open_servo_value = 0;
+    const static unsigned int close_servo_value = 2046;
+    const static unsigned int open_servo_value = 1192;
 
-    const static unsigned int stow_servo_value = 0;
+    const static unsigned int stow_servo_value = 1750;
     const static unsigned int extend_servo_value = 0;
 
     const static unsigned int touch_sensor_pin = 0;
