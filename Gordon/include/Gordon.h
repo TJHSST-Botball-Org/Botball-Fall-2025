@@ -24,6 +24,11 @@ private:
 
     const static unsigned int touch_sensor_pin = 0;
 
+    const static int left_color_sensor = 0;
+    const static int right_color_sensor = 1;
+    const static int color_sensor_threshold = 1000;
+
+
 public:
     Gordon();
 
@@ -42,4 +47,6 @@ public:
     void extend_arm();
 
     bool is_sensor_touch();
+
+    void line_up(int speed);
 };

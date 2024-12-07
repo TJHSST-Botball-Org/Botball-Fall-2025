@@ -93,3 +93,31 @@ bool Gordon::is_sensor_touch()
 {
     return get_digital_value(touch_sensor_pin);
 }
+
+void Gordon::line_up(int speed)
+{
+    this->move_cont(speed);
+
+    while (analog(left_color_sensor) < color_sensor_threshold && analog(right_color_sensor) < color_sensor_threshold)
+    {
+        msleep(1);
+    }
+
+    stop();
+
+    if (analog(left_color_sensor) < color_sensor_threshold)
+    {
+        mav(left_wheel_pin, speed*this->LEFT_TICKS_PER_INCH);
+    }
+    else
+    {
+        mav(right_wheel_pin, speed*this->RIGHT_TICKS_PER_INCH);
+    }
+
+    while (analog(left_color_sensor) < color_sensor_threshold || analog(right_color_sensor) < color_sensor_threshold)
+    {
+        msleep(1);
+    }
+
+    stop();
+}
