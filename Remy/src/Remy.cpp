@@ -115,6 +115,30 @@ void Remy::set_arm(int position, int duration)
 
     set_servo_position(arm_pin, position);
 }
+void Remy::set_sword(int position, int duration)
+{
+    enable_servo(sword_pin);
+    int startPos = get_servo_position(sword_pin);
+    int endPos = position;
+    double deltaPos = (endPos - startPos) / (double)  duration;
+
+    if ( startPos <= endPos ){      
+        for(double currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
+            int pos = currentPos;
+            msleep(1);
+            set_servo_position(sword_pin, pos);    
+        }
+    }
+    else{
+        for(double currentPos = startPos; currentPos > endPos; currentPos += deltaPos ){
+            int pos = currentPos;
+            msleep(1);
+            set_servo_position(sword_pin, pos);    
+        }
+    }
+
+    set_servo_position(sword_pin, position);
+}
 
 void Remy::sideways_cont(double speed)
 {

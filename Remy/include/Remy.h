@@ -24,6 +24,8 @@ private:
 
     constexpr static unsigned int arm_pin = 2;
 
+    constexpr static unsigned int sword_pin = 3;
+
     constexpr static unsigned int sensor_front_pin = 0;
     constexpr static unsigned int sensor_left_pin = 1;
     constexpr static unsigned int sensor_right_pin = 2;
@@ -55,6 +57,8 @@ public:
     void open_claw(int duration = 1000);
     void close_claw(int duration = 1000);
     void set_claw(int position, int duration = 1000);
+
+    void set_sword(int position, int duration = 1000);
 
     bool get_sensor_front();
     bool get_sensor_left();
