@@ -72,11 +72,21 @@ void Remy::set_claw(int position, int duration)
     enable_servo(claw_pin);
     int startPos = get_servo_position(claw_pin);
     int endPos = position;
-    double deltaPos = (endPos - startPos) / duration;
+    double deltaPos = (endPos - startPos) / (double)  duration;
 
-    for(int currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
-        msleep(1);
-        set_servo_position(claw_pin, currentPos);    
+    if ( startPos <= endPos ){      
+        for(double currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
+            int pos = currentPos;
+            msleep(1);
+            set_servo_position(claw_pin, pos);    
+        }
+    }
+    else{
+        for(double currentPos = startPos; currentPos > endPos; currentPos += deltaPos ){
+            int pos = currentPos;
+            msleep(1);
+            set_servo_position(claw_pin, pos);    
+        }
     }
 
     set_servo_position(claw_pin, position);
@@ -86,19 +96,20 @@ void Remy::set_arm(int position, int duration)
     enable_servo(arm_pin);
     int startPos = get_servo_position(arm_pin);
     int endPos = position;
+    double deltaPos = (endPos - startPos) / (double)  duration;
 
     if ( startPos <= endPos ){      
-        double deltaPos = (endPos - startPos) / duration;
-        for(int currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
+        for(double currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
+            int pos = currentPos;
             msleep(1);
-            set_servo_position(arm_pin, currentPos);    
+            set_servo_position(arm_pin, pos);    
         }
     }
     else{
-        double deltaPos = (endPos - startPos) / duration;
-        for(int currentPos = startPos; currentPos > endPos; currentPos += deltaPos ){
+        for(double currentPos = startPos; currentPos > endPos; currentPos += deltaPos ){
+            int pos = currentPos;
             msleep(1);
-            set_servo_position(arm_pin, currentPos);    
+            set_servo_position(arm_pin, pos);    
         }
     }
 
