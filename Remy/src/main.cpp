@@ -3,7 +3,7 @@
 #include <Remy.h>
 
 //constants for robot speed
-const float slow = 200;
+const float slow = 400;
 const float medium = 400;
 const float fast = 800;
 //constants for sensor ports
@@ -17,34 +17,41 @@ void p(std::string out) {
 int main(){
     //initialize robot
     Remy robot;
-    
+    robot.set_arm(900, 1000);
+    robot.set_claw(1200, 1000);
     //move out of start box and to botguy
     //move until you hit the front sensor on pvc pipe in front of botguy
-    robot.move_till_sensor(front, medium);
+    robot.rotate(108,medium);
+    robot.move_till_sensor_forward(medium);
     
     //backup to position arm to grab botguy
+    
     robot.move_distance(-1, medium);
 
     //bring down arm of claw to the height of botguy
-    robot.set_elbow(800);
-
-    //set the claw closed around botguys eyes
-    robot.set_claw(200);
-
-    //raise arm with buy in grasp
-    robot.set_elbow(1600);
+    robot.set_arm(1900, 2000);
+    robot.set_claw(750, 1000);
+    
+    robot.set_arm(1300, 1000);
+	
 
     //move backwards to area to drop off botguy
-    robot.move_distance(-30,slow);
+    robot.move_distance(-27,medium);
+    robot.rotate(-130, medium);
+    robot.move_till_sensor_forward(medium);
+    robot.set_arm(1800, 2000);
+    robot.set_claw(1500, 1000);
+    
+    robot.move_distance(-1, medium);
+    robot.rotate(108,medium);
+    robot.move_till_sensor_forward(medium);
+    
 
     //turn towards stove
-    robot.rotate(-120);
 
     //move towards stove
-    robot.move_distance(4, slow);
 
     //drop off botguy
-    robot.open_claw();
-
+    robot.reset();
 
 }
