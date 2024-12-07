@@ -83,17 +83,26 @@ void Remy::set_claw(int position, int duration)
 }
 void Remy::set_arm(int position, int duration)
 {
-    enable_servo(arm_pos);
-    int startPos = get_servo_position(arm_pos);
+    enable_servo(arm_pin);
+    int startPos = get_servo_position(arm_pin);
     int endPos = position;
-    double deltaPos = (endPos - startPos) / duration;
 
-    for(int currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
-        msleep(1);
-        set_servo_position(arm_pos, currentPos);    
+    if ( startPos <= endPos ){      
+        double deltaPos = (endPos - startPos) / duration;
+        for(int currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
+            msleep(1);
+            set_servo_position(arm_pin, currentPos);    
+        }
+    }
+    else{
+        double deltaPos = (endPos - startPos) / duration;
+        for(int currentPos = startPos; currentPos > endPos; currentPos += deltaPos ){
+            msleep(1);
+            set_servo_position(arm_pin, currentPos);    
+        }
     }
 
-    set_servo_position(arm_pos, position);
+    set_servo_position(arm_pin, position);
 }
 
 void Remy::sideways_cont(double speed)
