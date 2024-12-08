@@ -1,7 +1,6 @@
 #include "Gordon.h"
 #include <kipr/wombat.h>
 
-
 Gordon::Gordon()
 {
     cmpc(left_wheel_pin);
@@ -75,18 +74,41 @@ void Gordon::close_claw()
     msleep(1000);
 }
 
-void Gordon::stow_arm()
+void move_servo_over_time(int pin, int position, double duration)
 {
-    enable_servo(arm_servo_pin);
-    set_servo_position(arm_servo_pin, stow_servo_value);
-    msleep(1000);
+    /* Duration is in seconds */
+
+    enable_servo(pin);
+    int startPos = get_servo_position(pin);
+    int endPos = position;
+    double deltaPos = (endPos - startPos) / (duration*1000);
+
+    if ( startPos <= endPos ){      
+        for(double currentPos = startPos; currentPos < endPos; currentPos += deltaPos){
+            int pos = currentPos;
+            msleep(1);
+            set_servo_position(pin, pos);    
+        }
+    }
+    else{
+        for(double currentPos = startPos; currentPos > endPos; currentPos += deltaPos ){
+            int pos = currentPos;
+            msleep(1);
+            set_servo_position(pin, pos);    
+        }
+    }
+
+    set_servo_position(pin, position);
 }
 
 void Gordon::extend_arm()
 {
-    enable_servo(arm_servo_pin);
-    set_servo_position(arm_servo_pin, extend_servo_value);
-    msleep(1000);
+    move_servo_over_time(arm_servo_pin, extend_servo_value, 2.0);
+}
+
+void Gordon::stow_arm()
+{
+    move_servo_over_time(arm_servo_pin, stow_servo_value, 1.0);
 }
 
 bool Gordon::is_sensor_touch()
@@ -121,3 +143,4 @@ void Gordon::line_up(int speed)
 
     stop();
 }
+
