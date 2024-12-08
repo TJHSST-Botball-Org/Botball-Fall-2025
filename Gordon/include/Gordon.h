@@ -5,8 +5,8 @@
 
 class Gordon  {
 private:
-    constexpr static double LEFT_TICKS_PER_INCH = 235.793;
-    constexpr static double RIGHT_TICKS_PER_INCH = 257.56;
+    constexpr static double LEFT_TICKS_PER_INCH = 225;
+    constexpr static double RIGHT_TICKS_PER_INCH = 265.5;
     constexpr static double AXLE_LENGTH = 6.5; // Distance between the two wheels
     constexpr static double INCHES_PER_DEGREE = (3.14 * AXLE_LENGTH)/360.0;
 
